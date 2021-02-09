@@ -18,7 +18,7 @@ LABEL maintainer "Arthur Barr <arthur.barr@uk.ibm.com>, Rob Parker <PARROBE@uk.i
 
 LABEL "ProductID"="98102d16795c4263ad9ca075190a2d4d" \
       "ProductName"="IBM MQ Advanced for Developers" \
-      "ProductVersion"="9.0.4"
+      "ProductVersion"="9.2.1.0"
 
 # The URL to download the MQ installer from in tar.gz format
 ARG MQ_URL=https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev921_ubuntu_x86-64.tar.gz
@@ -51,7 +51,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     git \
     wget \
     build-essential \
-
   # Download and extract the MQ installation files
   && export DIR_EXTRACT=/tmp/mq \
   && mkdir -p ${DIR_EXTRACT} \
@@ -100,17 +99,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 #  && sed -i 's/PASS_MAX_DAYS\t99999/PASS_MAX_DAYS\t90/' /etc/login.defs \
 #  && sed -i 's/PASS_MIN_DAYS\t0/PASS_MIN_DAYS\t1/' /etc/login.defs \
 #  && sed -i 's/password\t\[success=1 default=ignore\]\tpam_unix\.so obscure sha512/password\t[success=1 default=ignore]\tpam_unix.so obscure sha512 minlen=8/' /etc/pam.d/common-password
-
 #COPY *.sh /usr/local/bin/
 #COPY *.mqsc /etc/mqm/
 #COPY admin.json /etc/mqm/
-
 #COPY mq-dev-config /etc/mqm/mq-dev-config
-
 #RUN chmod +x /usr/local/bin/*.sh
-
 # Always use port 1414 (the Docker administrator can re-map ports at runtime)
 # Expose port 9443 for the web console
 # EXPOSE 1414 9443
-
 ENV LANG=en_US.UTF-8
